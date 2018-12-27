@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/nabriski/node-cantrip.git"
   },
+  "bin": {
+    "cantrip-cli": "./index.js"
+  },
   "author": "nabriski",
   "license": "MIT",
   "bugs": {

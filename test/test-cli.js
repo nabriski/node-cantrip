@@ -13,4 +13,17 @@ tap.ok(JSON.parse(ret).name,"JSON with a name attribute");
 
 //image
 ret = shell.exec("echo \"let img=bash('convert -size 100x100 xc:white png:-');write(img)\" | ./index.js",{silent:true,encoding:'buffer'}).stdout;
-console.log(ret.length);
+tap.equal(ret.length,273,"image size is 273 bytes");
+
+//headers
+ret = shell.exec("echo \"writeHeaders({some_header:123});write('1\\\n')\" | ./index.js",{silent:true}).stdout;
+let expected = [
+    "--headers BEGIN",
+    "some_header: 123",
+    "--headers END",
+    "1"
+].join("\n");
+
+tap.equal(ret,expected,"value is 1 with custom header");
+
+

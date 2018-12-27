@@ -22,7 +22,7 @@ plugin.register('curl', curlImp, {
 */
 
 let bash = function(str){
-    return shell.exec(str,{silent:true}).stdout;
+    return shell.exec(str,{silent:true,shell:'/bin/rbash'}).stdout;
 }
 
 // Optionally, you can export the implementation of the command like so:

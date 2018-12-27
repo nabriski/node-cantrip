@@ -18,10 +18,10 @@
   "homepage": "https://github.com/nabriski/node-cantrip#readme",
   "dependencies": {
     "get-stdin": "^6.0.0",
-    "shelljs": "^0.8.3",
     "vm2": "^3.6.4"
   },
   "devDependencies": {
+    "shelljs": "^0.8.3",
     "tap": "^12.1.1"
   }
 }

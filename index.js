@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const getStdin  = require("get-stdin");
 const {NodeVM}  = require('vm2');
-const shell     = require('shelljs');
+const { execSync } = require('child_process');
 /*
 // This exposes the plugin utilities
 const plugin = require('shelljs/plugin');
@@ -22,15 +22,18 @@ plugin.register('curl', curlImp, {
 */
 
 let bash = function(str){
-    return shell.exec(str,{silent:true,shell:'/bin/rbash'}).stdout;
+    return execSync(str,{shell:'/bin/rbash'});
 }
 
 // Optionally, you can export the implementation of the command like so:
 getStdin().then(script => {
 
+    const write = function(out){
+        process.stdout.write(out,{encoding:'utf-8'});
+    }
     const vm = new NodeVM({
         console: 'inherit',
-        sandbox: {env:process.env,bash:bash}
+        sandbox: {env:process.env,bash:bash,write:write}
     });
     vm.run(script);
 

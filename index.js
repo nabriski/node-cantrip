@@ -28,26 +28,19 @@ let bash = function(str){
 // Optionally, you can export the implementation of the command like so:
 getStdin().then(script => {
 
-    let written = false;
-
     const write = function(out){
-        written = true;
         process.stdout.write(out,{encoding:'utf-8'});
     }
 
     const writeHeaders = function(headers){
 
-        if(written){
-            throw "Cannot write headers after writing. Please write headers before calling 'write' or 'console.log etc.'"
-        }
-
-        process.stdout.write("--headers BEGIN\n")
+        process.stdout.write("\n--headers BEGIN eb0d8398-0a05-11e9-8a8d-ab819760380e\n")
         Object
             .keys(headers)
             .forEach(function(h){
                 process.stdout.write([h,headers[h]].join(": ")+"\n")
             });
-        process.stdout.write("--headers END\n")
+        process.stdout.write("--headers END eb0d8398-0a05-11e9-8a8d-ab819760380e\n")
     }
     const vm = new NodeVM({
         console: 'inherit',

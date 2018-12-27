@@ -20,6 +20,8 @@ plugin.register('curl', curlImp, {
     cmdOptions: {"s":"-s"},
 });
 */
+const sep_uuid = "eb0d83980a0511e98a8dab819760380e";
+const headers_sep = `headers_${sep_uuid}`
 
 let bash = function(str){
     return execSync(str,{shell:'/bin/rbash'});
@@ -34,13 +36,13 @@ getStdin().then(script => {
 
     const writeHeaders = function(headers){
 
-        process.stdout.write("\n--headers BEGIN eb0d8398-0a05-11e9-8a8d-ab819760380e\n")
+        process.stdout.write(`\n${headers_sep}\n`)
         Object
             .keys(headers)
             .forEach(function(h){
                 process.stdout.write([h,headers[h]].join(": ")+"\n")
             });
-        process.stdout.write("--headers END eb0d8398-0a05-11e9-8a8d-ab819760380e\n")
+        process.stdout.write(`${headers_sep}\n`)
     }
     const vm = new NodeVM({
         console: 'inherit',
@@ -48,7 +50,7 @@ getStdin().then(script => {
             env:process.env,
             bash:bash,
             write:write,
-            writeHeaders:writeHeaders
+            headers:writeHeaders
         }
     });
     vm.run(script);

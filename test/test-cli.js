@@ -16,23 +16,23 @@ ret = shell.exec("echo \"let img=bash('convert -size 100x100 xc:white png:-');wr
 tap.equal(ret.length,273,"image size is 273 bytes");
 
 //headers
-ret = shell.exec("echo \"writeHeaders({some_header:123});write('1\\\n')\" | ./index.js",{silent:true}).stdout;
+ret = shell.exec("echo \"headers({some_header:123});write('1\\\n')\" | ./index.js",{silent:true}).stdout;
 let expected = [
     "",
-    "--headers BEGIN eb0d8398-0a05-11e9-8a8d-ab819760380e",
+    "headers_eb0d83980a0511e98a8dab819760380e",
     "some_header: 123",
-    "--headers END eb0d8398-0a05-11e9-8a8d-ab819760380e",
+    "headers_eb0d83980a0511e98a8dab819760380e",
     "1"
 ].join("\n");
 
 tap.equal(ret,expected,"value is 1 with custom header");
 
-ret = shell.exec("echo \"write('1');write('3');writeHeaders({some_header:123});write('2')\" | ./index.js",{silent:true}).stdout;
+ret = shell.exec("echo \"write('1');write('3');headers({some_header:123});write('2')\" | ./index.js",{silent:true}).stdout;
 expected = [
     "13",
-    "--headers BEGIN eb0d8398-0a05-11e9-8a8d-ab819760380e",
+    "headers_eb0d83980a0511e98a8dab819760380e",
     "some_header: 123",
-    "--headers END eb0d8398-0a05-11e9-8a8d-ab819760380e",
+    "headers_eb0d83980a0511e98a8dab819760380e",
     "2"
 ].join("\n");
 tap.equals(ret,expected,"can write headers wherever");

@@ -2,24 +2,7 @@
 const getStdin  = require("get-stdin");
 const {NodeVM}  = require('vm2');
 const { execSync } = require('child_process');
-/*
-// This exposes the plugin utilities
-const plugin = require('shelljs/plugin');
 
-// Implement your command in a function, which accepts `options` as the
-// first parameter, and other arguments after that
-function curlImp(options,url) {
-    let params = Object.keys(options).join(" ");
-    let cmd = ["curl",params,`\"${url}\"`].join(" ");
-    return shell.exec(cmd).stdout;
-}
-
-// Register the new plugin as a ShellJS command
-plugin.register('curl', curlImp, {
-    canReceivePipe : true,
-    cmdOptions: {"s":"-s"},
-});
-*/
 const sep_uuid = "eb0d83980a0511e98a8dab819760380e";
 const headers_sep = `headers_${sep_uuid}`
 

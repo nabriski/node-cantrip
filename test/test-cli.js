@@ -8,4 +8,8 @@ tap.equal(ret,"1","value is 1");
 ret = shell.exec("echo '{\"name\": \"Aaron Saunders\"}' | ./index.js \"let name = JSON.parse(stdin).name;write(name)\"",{silent:true}).stdout;
 tap.equals(ret,"Aaron Saunders","JSON with a name attribute");
 
+ret = shell.exec("./index.js \"write(env.koko)\" < /dev/null",{env:{koko:"loko"},silent:true}).stdout;
+tap.equals(ret,"loko","read env var");
+
+
 
